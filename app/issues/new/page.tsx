@@ -34,6 +34,17 @@ const NewIssue = () => {
   const [error, setError] = useState("");
   const [submit, setSubmit] = useState(false);
 
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setSubmit(true);
+      await axios.post("/api/issues", data);
+      router.push("/issues");
+    } catch (error) {
+      setSubmit(false);
+      setError("Please fill the required fields !!!");
+    }
+  })
+
   return (
     <div className="max-w-lg">
       {error && (
@@ -43,16 +54,7 @@ const NewIssue = () => {
       )}
       <form
         className="space-y-3"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setSubmit(true);
-            await axios.post("/api/issues", data);
-            router.push("/issues");
-          } catch (error) {
-            setSubmit(false);
-            setError("Please fill the required fields !!!");
-          }
-        })}
+        onSubmit={onSubmit}
       >
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register("title")} />
