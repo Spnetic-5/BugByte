@@ -1,3 +1,10 @@
+## BugByte 🐛
+
+####  Bug tracker built with Next.js, Tailwindcss, RadixUI, Prisma & MySQL. 🚀
+
+![image](https://github.com/Spnetic-5/BugByte/assets/66636289/eef4e260-67d2-409a-a3d6-ffd05b1a3636)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
