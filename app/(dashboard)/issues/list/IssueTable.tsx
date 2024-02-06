@@ -4,6 +4,9 @@ import { Issue, Status } from "@prisma/client";
 import NextLink from "next/link";
 import Link from "next/link";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons'
+
+type SortOrder = "asc" | "desc";
 
 interface Props {
   searchParams: IssueQuery;
@@ -28,6 +31,13 @@ const columns: {
   },
 ];
 
+const SortIcon = ({ sortOrder }: { sortOrder: SortOrder }) => {
+  if (sortOrder === 'asc') return <ArrowUpIcon className='inline ml-2'/>
+  else if (sortOrder === 'desc') return <ArrowDownIcon className='inline ml-2'/> 
+  
+  return null
+}
+
 const IssueTable = ({ searchParams, issues }: Props) => {
   return (
     <Table.Root variant="surface">
@@ -38,16 +48,22 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               key={column.value}
               className={column.className}
             >
-              <NextLink
-                href={{
-                  query: {
-                    ...searchParams,
-                    orderBy: column.value,
-                  },
-                }}
-              >
+               <NextLink href={{
+                query: { 
+                  ...searchParams, 
+                  orderBy: column.value.toString(),
+                  sortOrder: (searchParams.orderBy === column.value)
+                  ? (searchParams.sortOrder === 'asc') 
+                    ? 'desc' 
+                    : (searchParams.sortOrder === 'desc') 
+                      ? undefined 
+                      : 'asc'
+                  : 'asc'
+                }
+              }}>
                 {column.label}
               </NextLink>
+              {column.value === searchParams.orderBy && <SortIcon sortOrder={searchParams.sortOrder} />}
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
@@ -56,7 +72,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
         {issues.map((issue) => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <Link href={`issues/${issue.id}`}>{issue.title}</Link>
+              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>{" "}
               <div className="block md:hidden">
                 <IssueStatusBadge status={issue.status} />
               </div>
@@ -75,8 +91,10 @@ const IssueTable = ({ searchParams, issues }: Props) => {
 };
 
 export interface IssueQuery {
+  userId?: string;
   status: Status;
   orderBy: keyof Issue;
+  sortOrder: SortOrder;
   page: string;
 }
 

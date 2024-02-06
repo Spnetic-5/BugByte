@@ -9,8 +9,6 @@ import { Metadata } from 'next';
 
 interface Props {
   searchParams: IssueQuery;
-  orderBy: keyof Issue;
-  page: string;
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -21,11 +19,14 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const where = { status };
 
   const page = parseInt(searchParams.page) || 1;
-  const pageSize = 10;
+  const pageSize = 7;
 
-  const orderBy = columnNames.includes(searchParams.orderBy)
-    ? { [searchParams.orderBy]: "asc" }
-    : undefined;
+  const assignedToUserId = (searchParams.userId !== 'ALL') ? searchParams.userId : undefined
+
+  const orderBy = columnNames
+  .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: searchParams.sortOrder }
+    : undefined
 
   const issues = await prisma.issue.findMany({
     where,

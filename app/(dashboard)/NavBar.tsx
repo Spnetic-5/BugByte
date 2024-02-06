@@ -15,7 +15,7 @@ const NavBar = () => {
     },
     {
       name: "Issues",
-      path: "/issues",
+      path: "/issues/list",
     },
   ];
   return (
