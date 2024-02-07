@@ -1,17 +1,20 @@
-import prisma from "@/prisma/client"
+import prisma from "@/prisma/client";
 // import IssueSummary from "./IssueSummary"
 // import IssueChart from "./IssueChart"
-import { Box, Flex, Grid } from "@radix-ui/themes"
+import { Box, Flex, Grid } from "@radix-ui/themes";
 // import LatestIssues from "./LatestIssues"
-import { Metadata } from "next"
-import IssueSummary from "./IssueSummary"
+import { Metadata } from "next";
+import IssueSummary from "./IssueSummary";
+import IssueChart from "./IssueChart";
 // import LatestActivity from "./LatestActivity"
 // import { CommentWithIssueAndUser } from "../types"
 
 export default async function Home() {
-  const open = await prisma.issue.count({ where: { status: 'OPEN' }})
-  const inProgress = await prisma.issue.count({ where: { status: 'IN_PROGRESS' }})
-  const closed = await prisma.issue.count({ where: { status: 'CLOSE' }})
+  const open = await prisma.issue.count({ where: { status: "OPEN" } });
+  const inProgress = await prisma.issue.count({
+    where: { status: "IN_PROGRESS" },
+  });
+  const closed = await prisma.issue.count({ where: { status: "CLOSE" } });
 
   // const comments: CommentWithIssueAndUser[] = await prisma.comment.findMany({
   //   include: {
@@ -19,7 +22,7 @@ export default async function Home() {
   //     issue: true,
   //   },
   //   take: 5,
-  //   orderBy: { 
+  //   orderBy: {
   //     createdAt: 'desc',
   //   }
   // })
@@ -28,14 +31,14 @@ export default async function Home() {
     open,
     inProgress,
     closed,
-  }
-  
+  };
+
   return (
     <>
       <Grid columns={{ initial: "1", md: "2" }} gap="5">
         <Flex direction="column" gap="5">
           <IssueSummary {...statusCounts} />
-          {/* <IssueChart {...statusCounts} /> */}
+          <IssueChart {...statusCounts} />
         </Flex>
         {/* <LatestIssues /> */}
       </Grid>
@@ -43,11 +46,10 @@ export default async function Home() {
         <LatestActivity comments={comments} />
       </Box> */}
     </>
-    
-  )
+  );
 }
 
 export const metadata: Metadata = {
-  title: 'Mantis - Dashboard',
-  description: 'View a summary of project issues'
-}
+  title: "BugByte",
+  description: "View a summary of project bugs and backlogs",
+};

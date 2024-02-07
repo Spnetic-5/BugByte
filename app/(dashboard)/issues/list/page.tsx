@@ -5,7 +5,7 @@ import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
 import { Issue, Status } from "@prisma/client";
 import IssueActions from "./IssueActions";
 import Pagination from "@/app/components/Pagination";
-import { Metadata } from 'next';
+import { Metadata } from "next";
 
 interface Props {
   searchParams: IssueQuery;
@@ -21,12 +21,14 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 7;
 
-  const assignedToUserId = (searchParams.userId !== 'ALL') ? searchParams.userId : undefined
+  const assignedToUserId =
+    searchParams.userId !== "ALL" ? searchParams.userId : undefined;
 
-  const orderBy = columnNames
-  .includes(searchParams.orderBy)
+  const orderBy = columnNames.includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: searchParams.sortOrder }
-    : undefined
+    : {
+        updatedAt: "desc",
+      };
 
   const issues = await prisma.issue.findMany({
     where,
@@ -38,7 +40,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const issueCount = await prisma.issue.count({ where });
 
   return (
-    <Flex direction="column" gap="3">
+    <Flex direction="column" gap="3" className="max-w-screen-lg">
       <IssueActions />
       <IssueTable issues={issues} searchParams={searchParams} />
       <Pagination
@@ -50,12 +52,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
   );
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: 'Bug Tracker - Bug List',
-  description: 'View all project bugs'
+  title: "Bug Tracker - Bug List",
+  description: "View all project bugs",
 };
-
 
 export default IssuesPage;

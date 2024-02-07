@@ -4,9 +4,9 @@ import { Issue, Status } from "@prisma/client";
 import NextLink from "next/link";
 import Link from "next/link";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
-import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons'
+import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 
-type SortOrder = "asc" | "desc";
+type SortOrder = "desc" | "asc";
 
 interface Props {
   searchParams: IssueQuery;
@@ -25,18 +25,19 @@ const columns: {
     className: "hidden md:table-cell",
   },
   {
-    label: "Created",
-    value: "createdAt",
+    label: "Updated",
+    value: "updatedAt",
     className: "hidden md:table-cell",
   },
 ];
 
 const SortIcon = ({ sortOrder }: { sortOrder: SortOrder }) => {
-  if (sortOrder === 'asc') return <ArrowUpIcon className='inline ml-2'/>
-  else if (sortOrder === 'desc') return <ArrowDownIcon className='inline ml-2'/> 
-  
-  return null
-}
+  if (sortOrder === "asc") return <ArrowUpIcon className="inline ml-2" />;
+  else if (sortOrder === "desc")
+    return <ArrowDownIcon className="inline ml-2" />;
+
+  return null;
+};
 
 const IssueTable = ({ searchParams, issues }: Props) => {
   return (
@@ -48,22 +49,27 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               key={column.value}
               className={column.className}
             >
-               <NextLink href={{
-                query: { 
-                  ...searchParams, 
-                  orderBy: column.value.toString(),
-                  sortOrder: (searchParams.orderBy === column.value)
-                  ? (searchParams.sortOrder === 'asc') 
-                    ? 'desc' 
-                    : (searchParams.sortOrder === 'desc') 
-                      ? undefined 
-                      : 'asc'
-                  : 'asc'
-                }
-              }}>
+              <NextLink
+                href={{
+                  query: {
+                    ...searchParams,
+                    orderBy: column.value.toString(),
+                    sortOrder:
+                      searchParams.orderBy === column.value
+                        ? searchParams.sortOrder === "asc"
+                          ? "desc"
+                          : searchParams.sortOrder === "desc"
+                          ? undefined
+                          : "asc"
+                        : "asc",
+                  },
+                }}
+              >
                 {column.label}
               </NextLink>
-              {column.value === searchParams.orderBy && <SortIcon sortOrder={searchParams.sortOrder} />}
+              {column.value === searchParams.orderBy && (
+                <SortIcon sortOrder={searchParams.sortOrder} />
+              )}
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
@@ -81,7 +87,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               <IssueStatusBadge status={issue.status} />
             </Table.Cell>
             <Table.Cell className="hidden md:table-cell">
-              {issue.createdAt.toDateString()}
+              {issue.updatedAt.toDateString()}
             </Table.Cell>
           </Table.Row>
         ))}
