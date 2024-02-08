@@ -25,8 +25,8 @@ const columns: {
     className: "hidden md:table-cell",
   },
   {
-    label: "Updated",
-    value: "updatedAt",
+    label: "Created",
+    value: "createdAt",
     className: "hidden md:table-cell",
   },
 ];

@@ -26,13 +26,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
   const orderBy = columnNames.includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: searchParams.sortOrder }
-    : {
-        updatedAt: "desc",
-      };
+    : undefined;
 
-      // const users = await axios.get('https://randomuser.me/api/?results=10').then(
-      //   (res) => console.log(res)
-      // )
+  // const users = await axios.get('https://randomuser.me/api/?results=10').then(
+  //   (res) => console.log(res)
+  // )
 
   const issues = await prisma.issue.findMany({
     where,
