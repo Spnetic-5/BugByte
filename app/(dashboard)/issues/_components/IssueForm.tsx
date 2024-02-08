@@ -7,7 +7,6 @@ import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
 import { Issue } from "@prisma/client";
-import { error } from "console";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/app/validationSchemas";

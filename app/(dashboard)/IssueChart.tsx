@@ -1,6 +1,12 @@
 "use client";
 import { Card } from "@radix-ui/themes";
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from "recharts";
+import {
+  ResponsiveContainer,
+  BarChart,
+  XAxis,
+  YAxis,
+  Bar,
+} from "recharts";
 import React from "react";
 
 interface Props {

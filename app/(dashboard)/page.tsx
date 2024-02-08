@@ -1,8 +1,6 @@
 import prisma from "@/prisma/client";
-// import IssueSummary from "./IssueSummary"
-// import IssueChart from "./IssueChart"
 import { Box, Flex, Grid } from "@radix-ui/themes";
-// import LatestIssues from "./LatestIssues"
+import LatestIssues from "./LatestIssues";
 import { Metadata } from "next";
 import IssueSummary from "./IssueSummary";
 import IssueChart from "./IssueChart";
@@ -40,7 +38,7 @@ export default async function Home() {
           <IssueSummary {...statusCounts} />
           <IssueChart {...statusCounts} />
         </Flex>
-        {/* <LatestIssues /> */}
+        <LatestIssues />
       </Grid>
       {/* <Box mt="5">
         <LatestActivity comments={comments} />
@@ -48,6 +46,8 @@ export default async function Home() {
     </>
   );
 }
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "BugByte",
