@@ -5,6 +5,7 @@ import {
   BarChart,
   XAxis,
   YAxis,
+  Tooltip,
   Bar,
 } from "recharts";
 import React from "react";
@@ -28,6 +29,7 @@ const IssueChart = ({ open, inProgress, closed }: Props) => {
         <BarChart data={stats}>
           <XAxis dataKey="label" />
           <YAxis />
+          <Tooltip />
           <Bar
             dataKey="value"
             barSize={60}

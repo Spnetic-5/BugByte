@@ -39,7 +39,7 @@ const SortIcon = ({ sortOrder }: { sortOrder: SortOrder }) => {
   return null;
 };
 
-const IssueTable = ({ searchParams, issues }: Props) => {
+const IssueTable = async ({ searchParams, issues }: Props) => {
   return (
     <Table.Root variant="surface">
       <Table.Header>

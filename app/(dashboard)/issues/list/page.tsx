@@ -30,6 +30,10 @@ const IssuesPage = async ({ searchParams }: Props) => {
         updatedAt: "desc",
       };
 
+      // const users = await axios.get('https://randomuser.me/api/?results=10').then(
+      //   (res) => console.log(res)
+      // )
+
   const issues = await prisma.issue.findMany({
     where,
     orderBy,

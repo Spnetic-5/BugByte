@@ -4,8 +4,7 @@ import LatestIssues from "./LatestIssues";
 import { Metadata } from "next";
 import IssueSummary from "./IssueSummary";
 import IssueChart from "./IssueChart";
-// import LatestActivity from "./LatestActivity"
-// import { CommentWithIssueAndUser } from "../types"
+import { Issue } from "@prisma/client";
 
 export default async function Home() {
   const open = await prisma.issue.count({ where: { status: "OPEN" } });
@@ -14,16 +13,10 @@ export default async function Home() {
   });
   const closed = await prisma.issue.count({ where: { status: "CLOSE" } });
 
-  // const comments: CommentWithIssueAndUser[] = await prisma.comment.findMany({
-  //   include: {
-  //     user: true,
-  //     issue: true,
-  //   },
-  //   take: 5,
-  //   orderBy: {
-  //     createdAt: 'desc',
-  //   }
-  // })
+  const issues: Issue[] = await prisma.issue.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 5,
+  });
 
   const statusCounts = {
     open,
@@ -38,11 +31,8 @@ export default async function Home() {
           <IssueSummary {...statusCounts} />
           <IssueChart {...statusCounts} />
         </Flex>
-        <LatestIssues />
+        <LatestIssues issues={issues} />
       </Grid>
-      {/* <Box mt="5">
-        <LatestActivity comments={comments} />
-      </Box> */}
     </>
   );
 }
