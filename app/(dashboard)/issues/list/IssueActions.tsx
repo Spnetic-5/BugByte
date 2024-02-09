@@ -10,7 +10,7 @@ const IssueActions = () => {
       <IssueStatusFilter />
       <Button>
         <PlusIcon />
-        <Link href="/issues/new">New Issue</Link>
+        <Link href="/issues/new">New Bug</Link>
       </Button>
     </Flex>
   );

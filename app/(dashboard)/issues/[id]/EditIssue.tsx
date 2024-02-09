@@ -10,7 +10,7 @@ const EditIssueButton = ({ issueId }: { issueId: number }) => {
         className="flex items-center gap-1"
       > 
         <Pencil2Icon className="mr-2"/>
-        <Text>Edit Issue</Text>
+        <Text>Edit Bug</Text>
       </Link>
     </Button>
   );

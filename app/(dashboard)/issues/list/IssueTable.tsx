@@ -18,7 +18,7 @@ const columns: {
   value: keyof Issue;
   className?: string;
 }[] = [
-  { label: "Issue", value: "title" },
+  { label: "Bug 🐛", value: "title" },
   {
     label: "Status",
     value: "status",
@@ -55,10 +55,10 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
                     ...searchParams,
                     orderBy: column.value.toString(),
                     sortOrder:
-                      searchParams.orderBy === column.value
-                        ? searchParams.sortOrder === "asc"
+                      searchParams?.orderBy === column.value
+                        ? searchParams?.sortOrder === "asc"
                           ? "desc"
-                          : searchParams.sortOrder === "desc"
+                          : searchParams?.sortOrder === "desc"
                           ? undefined
                           : "asc"
                         : "asc",
@@ -67,15 +67,15 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
               >
                 {column.label}
               </NextLink>
-              {column.value === searchParams.orderBy && (
-                <SortIcon sortOrder={searchParams.sortOrder} />
+              {column.value === searchParams?.orderBy && (
+                <SortIcon sortOrder={searchParams?.sortOrder} />
               )}
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {issues.map((issue) => (
+        {issues?.map((issue) => (
           <Table.Row key={issue.id}>
             <Table.Cell>
               <Link href={`/issues/${issue.id}`}>{issue.title}</Link>{" "}

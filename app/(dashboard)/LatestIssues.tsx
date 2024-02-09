@@ -13,7 +13,7 @@ const LatentIssues = ({ issues }: Props) => {
   return (
     <Card>
       <Heading size="4" mb="5">
-        Latest Issues
+        Latest Bugs
       </Heading>
       <Table.Root>
         {issues.map((issue) => (

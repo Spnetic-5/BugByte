@@ -57,8 +57,8 @@ const IssuesPage = async ({ searchParams }: Props) => {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Bug Tracker - Bug List",
-  description: "View all project bugs",
+  title: "BugByte",
+  description: "Bug Management System",
 };
 
 export default IssuesPage;

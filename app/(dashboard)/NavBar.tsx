@@ -4,8 +4,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { AiFillBug } from "react-icons/ai";
 import classNames from "classnames";
+import Image from "next/image";
 
 const NavBar = () => {
   const currentPath = usePathname();
@@ -15,14 +15,14 @@ const NavBar = () => {
       path: "/",
     },
     {
-      name: "Issues",
+      name: "Bugs",
       path: "/issues/list",
     },
   ];
   return (
     <nav className="flex space-x-4 border-b mb-5 px-5 h-14 items-center">
       <Link href="/">
-        <AiFillBug />
+        <Image src="/logo.svg" alt="BugByte" width={50} height={50} />
       </Link>
       <ul className="flex space-x-4">
         {links.map((link) => {
