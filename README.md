@@ -1,6 +1,6 @@
 ## BugByte 🐛
 
-####  Bug tracker built with Next.js, Tailwindcss, RadixUI, Prisma & MySQL. 🚀
+####  Bug tracker built with Next.js, Tailwindcss, RadixUI, Prisma & PostgreSQL. 🚀
 
 ![image](https://github.com/Spnetic-5/BugByte/assets/66636289/eef4e260-67d2-409a-a3d6-ffd05b1a3636)
 
